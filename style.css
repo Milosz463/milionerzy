@@ -1,0 +1,312 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&display=swap");
+
+:root {
+  --bg1: #031c2f;
+  --bg2: #052c4a;
+  --panel: #06375b;
+  --gold: #ffcf33;
+  --gold2: #e8b200;
+  --blue: #0b4f6c;
+  --blue2: #083e58;
+}
+
+/* --- GLOBALNE --- */
+* {
+  font-family: "Montserrat", sans-serif;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding-top: 40px;
+  color: white;
+
+  /* animowane tło */
+  background: radial-gradient(circle, var(--bg2), var(--bg1));
+  background-size: 200% 200%;
+  animation: bgMove 12s ease-in-out infinite;
+}
+
+@keyframes bgMove {
+  0% {
+    background-position: 0% 0%;
+  }
+  50% {
+    background-position: 100% 100%;
+  }
+  100% {
+    background-position: 0% 0%;
+  }
+}
+
+/* --- TYTUŁ Z ANIMACJĄ --- */
+#tytul {
+  text-align: center;
+  color: white;
+  font-weight: 900;
+  font-size: 100px;
+
+  animation: glow 2.5s ease-in-out infinite, fadeDown 1s ease-out forwards;
+}
+
+@keyframes glow {
+  0% {
+    text-shadow: 0 0 10px var(--gold);
+  }
+  50% {
+    text-shadow: 0 0 30px var(--gold);
+  }
+  100% {
+    text-shadow: 0 0 10px var(--gold);
+  }
+}
+
+@keyframes fadeDown {
+  from {
+    opacity: 0;
+    transform: translateY(-40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* --- POLE PYTANIA --- */
+#test {
+  width: 90%;
+  max-width: 800px;
+  min-height: 120px;
+  background: linear-gradient(180deg, var(--panel), #041d2e);
+  border: 3px solid var(--gold);
+  border-radius: 16px;
+  display: none;
+  padding: 20px;
+  font-size: 22px;
+  font-weight: 700;
+  text-align: center;
+  box-shadow: 0 0 20px rgba(255, 207, 51, 0.4);
+  margin-bottom: 25px;
+
+  animation: fadeIn 0.6s ease-out forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* --- KONTENER --- */
+#kontener {
+  width: 90%;
+  max-width: 800px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+
+  animation: slideUp 0.7s ease-out forwards;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* --- PRZYCISKI --- */
+#kontener button {
+  background: linear-gradient(180deg, var(--blue), var(--blue2));
+  border: 3px solid var(--gold2);
+  border-radius: 14px;
+  padding: 16px;
+  font-size: 18px;
+  font-weight: 700;
+  color: white;
+  cursor: pointer;
+  transition: transform 0.15s, box-shadow 0.25s;
+
+  box-shadow: 0 0 10px rgba(255, 207, 51, 0.3);
+  animation: pulse 3s infinite ease-in-out;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 10px rgba(255, 207, 51, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 25px rgba(255, 207, 51, 0.5);
+  }
+  100% {
+    box-shadow: 0 0 10px rgba(255, 207, 51, 0.2);
+  }
+}
+
+#kontener button:hover {
+  transform: scale(1.08);
+  box-shadow: 0 0 25px rgba(255, 207, 51, 0.7);
+}
+
+#kontener button:active {
+  transform: scale(0.95);
+}
+
+/* --- PRZYCISK START --- */
+button[onclick="StartGry()"] {
+  background: linear-gradient(180deg, var(--gold), var(--gold2));
+  color: #0d0d0d;
+  font-weight: 900;
+  padding: 14px 28px;
+  font-size: 60px;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  margin-bottom: 25px;
+  box-shadow: 0 0 20px rgba(255, 207, 51, 0.5);
+  transition: 0.2s;
+
+  animation: bounceIn 1.3s ease-out forwards;
+}
+
+@keyframes bounceIn {
+  0% {
+    transform: scale(0.4);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+button[onclick="StartGry()"]:hover {
+  transform: scale(1.12);
+  box-shadow: 0 0 35px rgba(255, 207, 51, 1);
+}
+
+button[onclick="StartGry()"]:active {
+  transform: scale(0.9);
+}
+
+/* --- ANIMACJE DOBRA/ZŁA ODPOWIEDŹ --- */
+.wrong {
+  animation: wrongFlash 0.5s alternate 4, shake 0.4s;
+}
+
+.correct {
+  animation: correctFlash 0.5s alternate 4, pop 0.4s;
+}
+
+@keyframes wrongFlash {
+  from {
+    background: darkred;
+  }
+  to {
+    background: red;
+  }
+}
+
+@keyframes correctFlash {
+  from {
+    background: green;
+  }
+  to {
+    background: lightgreen;
+  }
+}
+
+@keyframes shake {
+  0% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-6px);
+  }
+  50% {
+    transform: translateX(6px);
+  }
+  75% {
+    transform: translateX(-6px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes pop {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.15);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* --- PRZYCISKI POMOCNICZE --- */
+button[onclick="podpowiedzEksperta()"],
+button[onclick="UsunZla()"] {
+  background: linear-gradient(180deg, var(--gold), var(--gold2));
+  color: #0d0d0d;
+  font-weight: 700;
+  padding: 10px 10px;
+  font-size: 12px;
+  border-radius: 12px;
+  border: none;
+  cursor: pointer;
+  margin-bottom: 25px;
+  box-shadow: 0 0 15px rgba(255, 207, 51, 0.5);
+  transition: 0.2s;
+
+  animation: fadeIn 0.8s ease-out forwards;
+}
+
+button[onclick="podpowiedzEksperta()"]:hover,
+button[onclick="UsunZla()"]:hover {
+  transform: scale(1.1);
+}
+
+#licznikPytan {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 50px;
+  row-gap: 10;
+  font-weight: 700;
+}
+
+#licznikPytan li.active {
+  color: yellow;
+  animation: blink 1.3s infinite;
+}
+
+@keyframes blink {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.25;
+  }
+  100% {
+    opacity: 1;
+  }
+}

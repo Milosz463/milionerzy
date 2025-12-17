@@ -265,3 +265,8 @@ function StartGry() {
   document.getElementById("test").style.display = "block";
   document.getElementById("btnUsunZla").style.display = "block";
 }
+
+
+
+
+//autor:Milosz Dawiec
